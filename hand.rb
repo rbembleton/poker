@@ -131,8 +131,8 @@ class Hand
   def self.equal_hand_compare(hand1, hand2)
     high_1, high_2 = 0, 0
 
-    puts hand1.hand_arr.to_s + hand1.evaluate_hand_to_num.to_s
-    puts hand2.hand_arr.to_s + hand2.evaluate_hand_to_num.to_s
+    # puts hand1.hand_arr.to_s + hand1.evaluate_hand_to_num.to_s
+    # puts hand2.hand_arr.to_s + hand2.evaluate_hand_to_num.to_s
 
     if [1,4,5,9].include?(hand1.evaluate_hand_to_num) #str, str-fl, fl, hc
       hand1.hand_arr.each {|card| high_1 = card.rank if card.rank > high_1}
@@ -141,7 +141,7 @@ class Hand
       # wrap around Ace case
       if (hand1.evaluate_hand_to_num == 5 || hand1.evaluate_hand_to_num == 1) &&
         (high_1 == 14 || high_2 == 14)
-        p "hi"
+        # p "hi"
         high_1 = 5 if hand1.hand_arr.any? {|card| card.rank == 2} && high_1 == 14
         high_2 = 5 if hand2.hand_arr.any? {|card| card.rank == 2} && high_2 == 14
       end
@@ -160,7 +160,15 @@ class Hand
     elsif [8].include?(hand1.evaluate_hand_to_num) #2oak
       high_1 = hand1.count_ranks.invert[2]
       high_2 = hand2.count_ranks.invert[2]
+
+      if high_1 == high_2 # same pair
+        p "hi"
+        high_1 = hand1.count_ranks.select {|key| key != high_1}.keys.max
+        high_2 = hand2.count_ranks.select {|key| key != high_2}.keys.max
+      end
+
     end
+
 
     high_1 > high_2 ? 0 : 1 #checking card rank so highest value is best
 
@@ -172,8 +180,8 @@ end
 
 ## TESTS FOR ALL HANDS
 
-# h = Hand.new
-# f = Hand.new
+h = Hand.new
+f = Hand.new
 # check_it = h.eval_hands_arr
 # h.hand_arr = [
 #   Card.new(10, :hearts),
@@ -260,13 +268,20 @@ end
 #
 # p h.evaluate_hand
 #
-# h.hand_arr = [
-#   Card.new(3, :spades),
-#   Card.new(3, :hearts),
-#   Card.new(2, :clubs),
-#   Card.new(5, :hearts),
-#   Card.new(14, :hearts)]
-#
+h.hand_arr = [
+  Card.new(3, :spades),
+  Card.new(3, :hearts),
+  Card.new(2, :clubs),
+  Card.new(5, :hearts),
+  Card.new(14, :hearts)]
+  h.hand_arr = [
+    Card.new(4, :spades),
+    Card.new(3, :hearts),
+    Card.new(2, :clubs),
+    Card.new(3, :hearts),
+    Card.new(5, :hearts)]
+
+
 # p h.evaluate_hand
 #
 # h.hand_arr = [
