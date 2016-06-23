@@ -29,6 +29,10 @@ class Hand
     end
   end
 
+  def inspect
+    "#{hand_arr[0].to_s}, #{hand_arr[1].to_s}, #{hand_arr[2].to_s}, #{hand_arr[3].to_s}, #{hand_arr[4].to_s}"
+  end
+
   def evaluate_hand_to_num
     eval_hands_arr.each_with_index do |prc, idx|
       return idx if prc.call(self)

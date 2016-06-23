@@ -74,8 +74,10 @@ class Game
       current_best = new_best == 0 ? current_best : idx
     end
 
+
     system("clear")
-    current_player = current_best
+        # p players[current_player].hand
+    @current_player = current_best
     puts "#{players[current_player].to_s.upcase} WINS!"
     puts "With a hand of: #{best_hand}\n\n"
     players[current_player].display_hand
