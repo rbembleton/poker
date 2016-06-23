@@ -25,4 +25,5 @@ class Deck
     @deck_array.shuffle!
   end
 
+
 end

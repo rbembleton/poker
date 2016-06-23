@@ -164,7 +164,6 @@ class Hand
 
 
 
-
 end
 
 ## TESTS FOR ALL HANDS
