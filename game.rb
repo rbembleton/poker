@@ -21,10 +21,8 @@ class Game
   def run
     deal_cards_start
     players.length.times {round_one}
-    # bidding_one
     players.length.times {card_exchange}
     players.length.times {round_two}
-    # bidding_two
     display_winner
 
   end
@@ -76,7 +74,6 @@ class Game
 
 
     system("clear")
-        # p players[current_player].hand
     @current_player = current_best
     puts "#{players[current_player].to_s.upcase} WINS!"
     puts "With a hand of: #{best_hand}\n\n"
@@ -117,8 +114,32 @@ end
 
 
 if __FILE__ == $PROGRAM_NAME
+  system('clear')
 
-  mygame = Game.new("RB", "Jon", "Kaelyn", "James")
+  puts "Welcome to Poker!"
+  players = []
+
+  puts "What is the first players name?"
+  players.push(gets.chomp)
+
+  puts "What is the second players name?"
+  players.push(gets.chomp)
+
+  puts "Would you like to add another player? (y or n)"
+  nextP = gets.chomp
+
+  while nextP.downcase == 'y' do
+    puts "What is the next players name?"
+    players.push(gets.chomp)
+
+    puts "Would you like to add another player? (y or n)"
+    nextP = gets.chomp
+  end
+
+  puts "\nAwesome, here are the players: #{players[0..-2].join(', ') + ' and ' + players[-1]}! \nPress any key to continue"
+  continue = gets
+
+  mygame = Game.new(*players)
   mygame.run
 
 
